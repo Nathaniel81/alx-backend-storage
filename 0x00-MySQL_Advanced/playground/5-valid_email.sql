@@ -1,11 +1,7 @@
 DELIMITER //
-IF EXISTS (
-    SELECT * FROM information_schema.triggers 
-    WHERE trigger_name = 'trig_users_email_update' 
-    AND trigger_schema = 'holberton'
-) THEN
-    DROP TRIGGER IF EXISTS trig_users_email_update;
-END IF;
+
+
+DROP TRIGGER IF EXISTS trig_users_email_update;
 
 CREATE TRIGGER trig_users_email_update
 BEFORE UPDATE ON users FOR EACH ROW
@@ -15,4 +11,5 @@ BEGIN
     END IF;
 END;
 //
+
 DELIMITER ;
