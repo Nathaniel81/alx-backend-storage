@@ -1,4 +1,5 @@
 DELIMITER //
+
 CREATE TRIGGER trig_users_email_update
 BEFORE UPDATE ON users FOR EACH ROW
 BEGIN
@@ -7,4 +8,3 @@ BEGIN
 	END IF;
 END;
 //
-DELIMITER;
