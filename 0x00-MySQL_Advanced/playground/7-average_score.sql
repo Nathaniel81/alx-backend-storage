@@ -5,7 +5,7 @@ BEGIN
     -- Declare variables to hold the sum of scores and count of corrections
     DECLARE sum_scores INT DEFAULT 0;
     DECLARE count_corrections INT DEFAULT 0;
-    DECLARE average_score FLOAT;
+    DECLARE average_score DECIMAL(5, 2);
 
     -- Calculate the sum of scores for the given user_id
     SELECT SUM(score) INTO sum_scores FROM corrections WHERE user_id = user_id;
