@@ -5,7 +5,8 @@ BEGIN
     DECLARE total_weight INT;
     DECLARE weighted_avg FLOAT;
     
-    SELECT SUM(c.score * p.weight) INTO total_score, SUM(p.weight) INTO total_weight
+    SELECT SUM(c.score * p.weight), SUM(p.weight) 
+	INTO total_weight, total_score
     FROM corrections c
     INNER JOIN projects p ON c.project_id = p.id
     WHERE c.user_id = user_id;
