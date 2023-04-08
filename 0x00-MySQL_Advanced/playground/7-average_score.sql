@@ -1,24 +1,28 @@
 DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
-DELIMITER $$
-CREATE PROCEDURE ComputeAverageScoreForUser (user_id INT)
+
+DELIMITER //
+
+CREATE PROCEDURE ComputeAverageScoreForUser(IN user_id INT)
 BEGIN
-    DECLARE total_score INT DEFAULT 0;
-    DECLARE projects_count INT DEFAULT 0;
+  DECLARE total_score FLOAT DEFAULT 0;
+  DECLARE num_scores INT DEFAULT 0;
+  DECLARE avg_score FLOAT DEFAULT 0;
 
-    SELECT SUM(score)
-        INTO total_score
-        FROM corrections
-        WHERE corrections.user_id = user_id;
-    SELECT COUNT(*)
-        INTO projects_count
-        FROM corrections
-        WHERE corrections.user_id = user_id;
+  -- Calculate the total score and number of scores for the given user
+  SELECT SUM(score), COUNT(*) INTO total_score, num_scores
+  FROM corrections
+  WHERE corrections.user_id = user_id;
 
-    -- UPDATE users
-        -- SET users.average_score = IF(projects_count = 0, 0, total_score / projects_count)
-        -- WHERE users.id = user_id;
-	UPDATE users
-  	SET average_score = total_score / projects_count
-  	WHERE id = user_id;
-END $$
+  -- Calculate the average score, handling division by zero case
+  IF num_scores > 0 THEN
+    SET avg_score = total_score / num_scores;
+  END IF;
+
+  -- Update the average_score field in the users table for the given user
+  UPDATE users
+  SET average_score = avg_score
+  WHERE id = user_id;
+END;
+//
+
 DELIMITER ;
