@@ -11,15 +11,12 @@ BEGIN
     FROM corrections
     WHERE user_id = user_id;
     
-    -- Calculate average score
-    IF total_count > 0 THEN
-        SET avg_score = total_score / total_count - 1;
-    ELSE
-        SET avg_score = 0;
-    END IF;
+	UPDATE users
+        SET users.average_score = IF(projects_count = 0, 0, total_score / projects_count)
+        WHERE users.id = user_id;
     
     -- Update average score in users table
-    UPDATE users SET average_score = avg_score WHERE id = user_id;
+    -- UPDATE users SET average_score = avg_score WHERE id = user_id;
     
 END //
 DELIMITER ;
