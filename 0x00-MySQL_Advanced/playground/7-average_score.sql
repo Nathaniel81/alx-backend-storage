@@ -12,7 +12,7 @@ BEGIN
     WHERE user_id = user_id;
     
 	UPDATE users
-        SET users.average_score = IF(projects_count = 0, 0, total_score / projects_count)
+        SET users.avg_score = IF(total_count = 0, 0, total_score / total_count)
         WHERE users.id = user_id;
     
     -- Update average score in users table
