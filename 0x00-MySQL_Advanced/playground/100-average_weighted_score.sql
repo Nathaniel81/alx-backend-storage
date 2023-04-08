@@ -5,11 +5,24 @@ BEGIN
     DECLARE total_weight INT;
     DECLARE weighted_avg FLOAT;
     
-    SELECT SUM(c.score * p.weight), SUM(p.weight) 
-	INTO total_weight, total_score
-    FROM corrections c
-    INNER JOIN projects p ON c.project_id = p.id
-    WHERE c.user_id = user_id;
+    -- SELECT SUM(c.score * p.weight), SUM(p.weight) 
+	-- INTO total_weight, total_score
+    -- FROM corrections c
+    -- INNER JOIN projects p ON c.project_id = p.id
+    -- WHERE c.user_id = user_id;
+	SELECT SUM(corrections.score * projects.weight)
+        INTO total_weighted_score
+        FROM corrections
+            INNER JOIN projects
+                ON corrections.project_id = projects.id
+        WHERE corrections.user_id = user_id;
+
+    SELECT SUM(projects.weight)
+        INTO total_weight
+        FROM corrections
+            INNER JOIN projects
+                ON corrections.project_id = projects.id
+        WHERE corrections.user_id = user_id;
     
     IF total_weight > 0 THEN
         SET weighted_avg = total_score / total_weight;
