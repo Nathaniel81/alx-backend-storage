@@ -13,7 +13,7 @@ BEGIN
     
     -- Calculate average score
     IF total_count > 0 THEN
-        SET avg_score = total_score / total_count;
+        SET avg_score = total_score / total_count - 1;
     ELSE
         SET avg_score = 0;
     END IF;
