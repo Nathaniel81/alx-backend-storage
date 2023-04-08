@@ -8,7 +8,7 @@ BEGIN
 	SELECT SUM(score) INTO sum_scores FROM corrections WHERE user_id = user_id;
 	SELECT COUNT(*) INTO count_corrections FROM corrections WHERE user_id = user_id;
 
-	average_score = sum_scores / count_corrections;
+	SET average_score = sum_scores / count_corrections;
 	UPDATE users SET average_score = average_score WHERE id = user_id;
 END //
 DELIMITER ;
