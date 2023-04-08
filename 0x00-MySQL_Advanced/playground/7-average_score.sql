@@ -1,5 +1,5 @@
 DELIMITER //
-
+DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
 CREATE PROCEDURE ComputeAverageScoreForUser(IN user_id INT)
 BEGIN
     -- Declare variables to hold the sum of scores and count of corrections
