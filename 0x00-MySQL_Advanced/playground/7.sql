@@ -11,7 +11,7 @@ BEGIN
   -- Calculate the total score and number of scores for the given user
   SELECT SUM(score), COUNT(*) INTO total_score, num_scores
   FROM corrections
-  WHERE user_id = user_id;
+  WHERE corrections.user_id = user_id;
 
   -- Calculate the average score, handling division by zero case
   IF num_scores > 0 THEN
