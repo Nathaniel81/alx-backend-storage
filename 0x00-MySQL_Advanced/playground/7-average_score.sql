@@ -1,4 +1,5 @@
 DELIMITER //
+DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
 CREATE PROCEDURE ComputeAverageScoreForUser(IN user_id INT)
 BEGIN
 	DECLARE sum_scores INT DEFAULT 0;
