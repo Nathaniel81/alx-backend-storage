@@ -12,7 +12,7 @@ BEGIN
     -- INNER JOIN projects p ON c.project_id = p.id
     -- WHERE c.user_id = user_id;
 	SELECT SUM(corrections.score * projects.weight)
-        INTO total_weighted_score
+        INTO total_score
         FROM corrections
             INNER JOIN projects
                 ON corrections.project_id = projects.id
